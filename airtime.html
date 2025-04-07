@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Airtime | DARKVTU</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --arcadia-black: #0a0a0a;
+      --vanta-black: #000000;
+      --dark-gray: #1a1a1a;
+      --neon-blue: #00f5ff;
+      --neon-purple: #bc13fe;
+      --text-light: #e0e0e0;
+      --text-lighter: #ffffff;
+      --border-dark: rgba(255, 255, 255, 0.05);
+      --mtn-yellow: #ffcc00;
+      --glo-green: #00a651;
+      --airtel-red: #ee1d23;
+      --mobile-green: #056f57;
+      --mobile-black: #000000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, var(--vanta-black) 0%, var(--arcadia-black) 100%);
+      min-height: 100vh;
+      color: var(--text-light);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background: var(--dark-gray);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-dark);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 25px;
+      color: var(--neon-blue);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      color: var(--text-lighter);
+      transform: translateX(-3px);
+    }
+
+    .form-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .form-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--vanta-black), var(--arcadia-black));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+    }
+
+    .form-icon i {
+      font-size: 32px;
+      color: var(--neon-blue);
+    }
+
+    h2 {
+      color: var(--text-lighter);
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-subtitle {
+      color: var(--text-light);
+      opacity: 0.7;
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 15px 20px;
+      background: var(--arcadia-black);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      color: var(--text-lighter);
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.1);
+    }
+
+    input::placeholder {
+      color: var(--text-light);
+      opacity: 0.5;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      color: var(--text-lighter);
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(0, 245, 255, 0.2);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 245, 255, 0.3);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      background: var(--dark-gray);
+      color: var(--text-light);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    #responseMsg {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+    }
+
+    .success {
+      background-color: rgba(0, 245, 255, 0.1);
+      color: var(--neon-blue);
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      display: block;
+    }
+
+    .error {
+      background-color: rgba(188, 19, 254, 0.1);
+      color: var(--neon-purple);
+      border: 1px solid rgba(188, 19, 254, 0.3);
+      display: block;
+    }
+
+    .loading-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      height: 40px;
+      margin: 20px 0;
+    }
+
+    .loading-bar {
+      width: 8px;
+      height: 30px;
+      background: linear-gradient(to top, var(--neon-blue), var(--neon-purple));
+      border-radius: 4px;
+      animation: loading 1.2s ease-in-out infinite;
+    }
+
+    .loading-bar:nth-child(1) { animation-delay: 0s; }
+    .loading-bar:nth-child(2) { animation-delay: 0.2s; }
+    .loading-bar:nth-child(3) { animation-delay: 0.4s; }
+    .loading-bar:nth-child(4) { animation-delay: 0.6s; }
+    .loading-bar:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes loading {
+      0%, 100% { transform: scaleY(0.3); }
+      50% { transform: scaleY(1); }
+    }
+
+    .network-icon {
+      position: absolute;
+      right: 15px;
+      top: 40px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+  .remember-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px; /* Positive value pushes it down */
+  margin-bottom: 10px; /* Adds space below */
+}
+
+    #rememberNumber {
+      width: auto;
+    }
+
+    .remember-label {
+      margin-bottom: 0;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .cashback-badge {
+      background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+      color: var(--text-lighter);
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .cashback-icon {
+      font-size: 16px;
+    }
+
+    /* Network specific styles */
+    .mtn { background-color: var(--mtn-yellow); color: black; }
+    .glo { background-color: var(--glo-green); }
+    .airtel { background-color: var(--airtel-red); }
+    .mobile { background: linear-gradient(45deg, var(--mobile-green), var(--mobile-black)); }
+
+    .network-logo {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .network-option {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+    }
+
+    select option {
+      padding: 10px;
+    }
+
+    .saved-numbers {
+      margin-top: 15px;
+    }
+
+    .saved-number {
+      display: inline-block;
+      background: rgba(0, 245, 255, 0.1);
+      padding: 5px 10px;
+      border-radius: 15px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid rgba(0, 245, 255, 0.2);
+    }
+
+    .saved-number:hover {
+      background: rgba(0, 245, 255, 0.2);
+    }
+
+    .saved-number i {
+      margin-left: 5px;
+      font-size: 12px;
+      color: var(--neon-blue);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="back-btn" onclick="window.location.href='index.html'">
+      <i class="fas fa-arrow-left"></i>
+      Back to Services
+    </div>
+    
+    <div class="form-header">
+      <div class="form-icon">
+        <i class="fas fa-phone-alt"></i>
+      </div>
+      <h2>Buy Airtime</h2>
+      <p class="form-subtitle">Instant recharge for all networks</p>
+    </div>
+
+    <form id="airtimeForm">
+      <div class="input-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="0801 234 5678" required>
+        <div class="remember-group">
+          <input type="checkbox" id="rememberNumber">
+          <label for="rememberNumber" class="remember-label">Remember this number</label>
+        </div>
+        <div class="saved-numbers" id="savedNumbers"></div>
+      </div>
+
+      <div class="input-group">
+        <label for="amount">Amount (₦)</label>
+        <input type="number" id="amount" placeholder="100" min="50" required>
+        <div id="cashbackDisplay" class="cashback-badge" style="display: none;">
+          <i class="fas fa-coins cashback-icon"></i>
+          <span id="cashbackAmount">0.00</span> Cashback
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="network">Network Provider</label>
+        <select id="network" required>
+          <option value="" disabled selected>Select your network</option>
+          <option value="mtn" class="network-option">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Mtn-logo.svg/1200px-Mtn-logo.svg.png" class="network-logo"> MTN
+          </option>
+          <option value="glo" class="network-option">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Glo_logo.svg/1200px-Glo_logo.svg.png" class="network-logo"> Glo
+          </option>
+          <option value="airtel" class="network-option">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Airtel_logo.svg/1200px-Airtel_logo.svg.png" class="network-logo"> Airtel
+          </option>
+          <option value="etisalat" class="network-option">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/9mobile_logo.svg/1200px-9mobile_logo.svg.png" class="network-logo"> 9mobile
+          </option>
+        </select>
+        <div class="network-icon" id="networkIcon">
+          <i class="fas fa-network-wired"></i>
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn">
+        <span id="btnText">Buy Airtime Now</span>
+      </button>
+    </form>
+
+    <div class="loading-container" id="loading">
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+    </div>
+
+    <p id="responseMsg"></p>
+  </div>
+
+  <script>
+    // Network data with colors and cashback rates
+    const networks = {
+      mtn: { 
+        icon: "fas fa-bolt", 
+        color: "mtn", 
+        cashbackRate: 0.01 // 1% cashback
+      },
+      glo: { 
+        icon: "fas fa-wifi", 
+        color: "glo",
+        cashbackRate: 0.015 // 1.5% cashback
+      },
+      airtel: { 
+        icon: "fas fa-signal", 
+        color: "airtel",
+        cashbackRate: 0.02 // 2% cashback
+      },
+      etisalat: { 
+        icon: "fas fa-network-wired", 
+        color: "mobile",
+        cashbackRate: 0.025 // 2.5% cashback
+      }
+    };
+
+    // Load saved phone numbers from localStorage
+    function loadSavedNumbers() {
+      const savedNumbers = JSON.parse(localStorage.getItem('savedPhoneNumbers')) || [];
+      const container = document.getElementById('savedNumbers');
+      container.innerHTML = '';
+      
+      savedNumbers.forEach(number => {
+        const numberElement = document.createElement('span');
+        numberElement.className = 'saved-number';
+        numberElement.innerHTML = `${number} <i class="fas fa-times remove-number"></i>`;
+        numberElement.addEventListener('click', (e) => {
+          if (e.target.classList.contains('remove-number')) {
+            // Remove number from saved list
+            const updatedNumbers = savedNumbers.filter(n => n !== number);
+            localStorage.setItem('savedPhoneNumbers', JSON.stringify(updatedNumbers));
+            loadSavedNumbers();
+          } else {
+            // Fill the phone input
+            document.getElementById('phone').value = formatPhoneNumber(number);
+          }
+        });
+        container.appendChild(numberElement);
+      });
+    }
+
+    // Format phone number with spaces
+    function formatPhoneNumber(phone) {
+      return phone.replace(/\D/g, '').match(/.{1,4}/g)?.join(' ') || '';
+    }
+
+    // Calculate cashback
+    function calculateCashback(amount, network) {
+      if (!amount || !network) return 0;
+      const rate = networks[network]?.cashbackRate || 0;
+      const cashback = Math.max(0.05, amount * rate); // Minimum ₦0.05
+      return Math.round(cashback * 100) / 100; // Round to 2 decimal places
+    }
+
+    // Update cashback display
+    function updateCashback() {
+      const amount = parseFloat(document.getElementById('amount').value) || 0;
+      const network = document.getElementById('network').value;
+      const cashback = calculateCashback(amount, network);
+      
+      if (amount >= 50 && network) {
+        document.getElementById('cashbackAmount').textContent = cashback.toFixed(2);
+        document.getElementById('cashbackDisplay').style.display = 'inline-flex';
+      } else {
+        document.getElementById('cashbackDisplay').style.display = 'none';
+      }
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      loadSavedNumbers();
+      
+      // Load last used network if available
+      const lastNetwork = localStorage.getItem('lastUsedNetwork');
+      if (lastNetwork && networks[lastNetwork]) {
+        document.getElementById('network').value = lastNetwork;
+        updateNetworkIcon(lastNetwork);
+      }
+
+      // Load remembered phone number if checkbox is checked
+      const rememberChecked = localStorage.getItem('rememberNumber') === 'true';
+      document.getElementById('rememberNumber').checked = rememberChecked;
+      
+      if (rememberChecked) {
+        const lastPhone = localStorage.getItem('lastUsedPhone');
+        if (lastPhone) {
+          document.getElementById('phone').value = formatPhoneNumber(lastPhone);
+        }
+      }
+
+      // Set up event listeners
+      document.getElementById('amount').addEventListener('input', updateCashback);
+      document.getElementById('network').addEventListener('change', function() {
+        updateNetworkIcon(this.value);
+        updateCashback();
+        localStorage.setItem('lastUsedNetwork', this.value);
+      });
+
+      document.getElementById('phone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 0) {
+          value = value.match(/.{1,4}/g).join(' ');
+        }
+        e.target.value = value;
+      });
+    });
+
+    // Update network icon and color
+    function updateNetworkIcon(network) {
+      const networkIcon = document.getElementById('networkIcon');
+      if (networks[network]) {
+        networkIcon.innerHTML = `<i class="${networks[network].icon}"></i>`;
+        networkIcon.className = `network-icon ${networks[network].color}`;
+      } else {
+        networkIcon.innerHTML = '<i class="fas fa-network-wired"></i>';
+        networkIcon.className = 'network-icon';
+      }
+    }
+
+    // Form submission
+    document.getElementById("airtimeForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const phone = document.getElementById("phone").value.replace(/\s/g, '');
+      const amount = document.getElementById("amount").value;
+      const network = document.getElementById("network").value;
+      const rememberNumber = document.getElementById("rememberNumber").checked;
+      const submitBtn = document.getElementById("submitBtn");
+      const loading = document.getElementById("loading");
+      const responseMsg = document.getElementById("responseMsg");
+      
+      // Validate inputs
+      if (!phone || phone.length !== 11 || !amount || !network) {
+        responseMsg.textContent = "❌ Please fill all fields correctly";
+        responseMsg.className = "error";
+        responseMsg.style.display = "block";
+        return;
+      }
+
+      // Show loading animation
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing';
+      loading.style.display = "flex";
+      responseMsg.textContent = "";
+      responseMsg.className = "";
+      
+      // Save phone number if remember is checked
+      if (rememberNumber) {
+        localStorage.setItem('rememberNumber', 'true');
+        localStorage.setItem('lastUsedPhone', phone);
+        
+        // Add to saved numbers if not already there
+        const savedNumbers = JSON.parse(localStorage.getItem('savedPhoneNumbers')) || [];
+        if (!savedNumbers.includes(phone)) {
+          savedNumbers.push(phone);
+          localStorage.setItem('savedPhoneNumbers', JSON.stringify(savedNumbers));
+          loadSavedNumbers();
+        }
+      } else {
+        localStorage.setItem('rememberNumber', 'false');
+      }
+
+      // Calculate cashback
+      const cashback = calculateCashback(amount, network);
+      
+      // Simulate API call with timeout (replace with actual fetch)
+      setTimeout(() => {
+        // This is a simulation - replace with your actual API call
+        const isSuccess = Math.random() > 0.3; // 70% chance of success
+        
+        if (isSuccess) {
+          responseMsg.innerHTML = `
+            ✅ Success! ₦${amount} airtime sent to ${formatPhoneNumber(phone)}<br>
+            <small>You earned ₦${cashback.toFixed(2)} cashback!</small>
+          `;
+          responseMsg.className = "success";
+          
+          // Clear form on success (except network)
+          document.getElementById("phone").value = "";
+          document.getElementById("amount").value = "";
+        } else {
+          responseMsg.textContent = "❌ Failed to process request. Please try again.";
+          responseMsg.className = "error";
+        }
+        
+        // Hide loading animation
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span id="btnText">Buy Airtime Now</span>';
+        loading.style.display = "none";
+      }, 2000);
+    });
+
+    // Initial cashback check
+    updateCashback();
+  </script>
+</body>
+</html>
