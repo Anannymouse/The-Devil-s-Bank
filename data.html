@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Data | DARKVTU</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --arcadia-black: #0a0a0a;
+      --vanta-black: #000000;
+      --dark-gray: #1a1a1a;
+      --neon-blue: #00f5ff;
+      --neon-purple: #bc13fe;
+      --text-light: #e0e0e0;
+      --text-lighter: #ffffff;
+      --border-dark: rgba(255, 255, 255, 0.05);
+      --mtn-yellow: #ffcc00;
+      --glo-green: #00a651;
+      --airtel-red: #ee1d23;
+      --mobile-green: #056f57;
+      --mobile-black: #000000;
+      --success-green: #00c853;
+      --error-red: #ff3d00;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, var(--vanta-black) 0%, var(--arcadia-black) 100%);
+      min-height: 100vh;
+      color: var(--text-light);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background: var(--dark-gray);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-dark);
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 25px;
+      color: var(--neon-blue);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      color: var(--text-lighter);
+      transform: translateX(-3px);
+    }
+
+    .form-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .form-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--vanta-black), var(--arcadia-black));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 20px rgba(0, 245, 255, 0.2); }
+      100% { box-shadow: 0 0 30px rgba(0, 245, 255, 0.4); }
+    }
+
+    .form-icon i {
+      font-size: 32px;
+      color: var(--neon-blue);
+    }
+
+    h2 {
+      color: var(--text-lighter);
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-subtitle {
+      color: var(--text-light);
+      opacity: 0.7;
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 15px 20px;
+      background: var(--arcadia-black);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      color: var(--text-lighter);
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.1);
+    }
+
+    input::placeholder {
+      color: var(--text-light);
+      opacity: 0.5;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      color: var(--text-lighter);
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(0, 245, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 245, 255, 0.3);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      background: var(--dark-gray);
+      color: var(--text-light);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(30deg);
+      transition: all 0.3s;
+    }
+
+    button:hover::after {
+      left: 100%;
+    }
+
+    #responseMsg {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success {
+      background-color: rgba(0, 200, 83, 0.1);
+      color: var(--success-green);
+      border: 1px solid rgba(0, 200, 83, 0.3);
+      display: block;
+    }
+
+    .error {
+      background-color: rgba(255, 61, 0, 0.1);
+      color: var(--error-red);
+      border: 1px solid rgba(255, 61, 0, 0.3);
+      display: block;
+    }
+
+    .loading-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      height: 40px;
+      margin: 20px 0;
+    }
+
+    .loading-bar {
+      width: 8px;
+      height: 30px;
+      background: linear-gradient(to top, var(--neon-blue), var(--neon-purple));
+      border-radius: 4px;
+      animation: loading 1.2s ease-in-out infinite;
+    }
+
+    .loading-bar:nth-child(1) { animation-delay: 0s; }
+    .loading-bar:nth-child(2) { animation-delay: 0.2s; }
+    .loading-bar:nth-child(3) { animation-delay: 0.4s; }
+    .loading-bar:nth-child(4) { animation-delay: 0.6s; }
+    .loading-bar:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes loading {
+      0%, 100% { transform: scaleY(0.3); }
+      50% { transform: scaleY(1); }
+    }
+
+    .network-icon {
+      position: absolute;
+      right: 15px;
+      top: 40px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .remember-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: -15px;
+    }
+
+    #rememberNumber {
+      width: auto;
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--neon-blue);
+      border-radius: 4px;
+      outline: none;
+      transition: all 0.2s;
+      position: relative;
+      cursor: pointer;
+    }
+
+    #rememberNumber:checked {
+      background-color: var(--neon-blue);
+    }
+
+    #rememberNumber:checked::after {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      color: var(--vanta-black);
+      font-size: 10px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .remember-label {
+      margin-bottom: 0;
+      font-size: 13px;
+      opacity: 0.8;
+      cursor: pointer;
+    }
+
+    .cashback-badge {
+      background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+      color: var(--text-lighter);
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(188, 19, 254, 0.4); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(188, 19, 254, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(188, 19, 254, 0); }
+    }
+
+    .cashback-icon {
+      font-size: 16px;
+    }
+
+    /* Network specific styles */
+    .mtn { background-color: var(--mtn-yellow); color: black; }
+    .glo { background-color: var(--glo-green); }
+    .airtel { background-color: var(--airtel-red); }
+    .mobile { background: linear-gradient(45deg, var(--mobile-green), var(--mobile-black)); }
+
+    .network-logo {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .network-option {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+    }
+
+    select option {
+      padding: 10px;
+    }
+
+    .saved-numbers {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .saved-number {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(0, 245, 255, 0.1);
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid rgba(0, 245, 255, 0.2);
+    }
+
+    .saved-number:hover {
+      background: rgba(0, 245, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .saved-number i {
+      margin-left: 8px;
+      font-size: 12px;
+      color: var(--neon-blue);
+      transition: all 0.2s;
+    }
+
+    .saved-number:hover i {
+      transform: scale(1.2);
+    }
+
+    .data-plans {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .data-plan {
+      background: var(--arcadia-black);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .data-plan:hover {
+      border-color: var(--neon-blue);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .data-plan.selected {
+      border: 2px solid var(--neon-purple);
+      background: linear-gradient(135deg, rgba(188, 19, 254, 0.1), rgba(0, 245, 255, 0.1));
+      transform: translateY(-5px);
+    }
+
+    .data-plan::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .data-plan.selected::before {
+      transform: scaleX(1);
+    }
+
+    .data-plan-amount {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: var(--text-lighter);
+    }
+
+    .data-plan-details {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 5px;
+    }
+
+    .data-plan-validity {
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    .data-plan-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--neon-blue);
+      color: var(--vanta-black);
+      font-size: 10px;
+      font-weight: bold;
+      padding: 3px 8px;
+      border-radius: 10px;
+      transform: rotate(15deg);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .selected-plan-info {
+      background: var(--arcadia-black);
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 15px;
+      border: 1px solid var(--neon-purple);
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .selected-plan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .selected-plan-data {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--neon-blue);
+    }
+
+    .selected-plan-price {
+      font-weight: 700;
+      font-size: 20px;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .selected-plan-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      opacity: 0.8;
+      margin-bottom: 5px;
+    }
+
+    .selected-plan-description {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: var(--arcadia-black);
+      color: var(--text-light);
+      text-align: center;
+      border-radius: 6px;
+      padding: 10px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      border: 1px solid var(--border-dark);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .network-selector {
+      position: relative;
+    }
+
+    .network-selector::after {
+      content: '\f078';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--neon-blue);
+      pointer-events: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+      
+      .data-plans {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-icon {
+        width: 70px;
+        height: 70px;
+      }
+      
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="back-btn" onclick="window.location.href='index.html'">
+      <i class="fas fa-arrow-left"></i>
+      Back to Services
+    </div>
+    
+    <div class="form-header">
+      <div class="form-icon">
+        <i class="fas fa-database"></i>
+      </div>
+      <h2>Buy Data Bundle</h2>
+      <p class="form-subtitle">Instant activation for all networks</p>
+    </div>
+
+    <form id="dataForm">
+      <div class="input-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="0801 234 5678" required>
+        <div class="remember-group">
+          <input type="checkbox" id="rememberNumber">
+          <label for="rememberNumber" class="remember-label">Remember this number</label>
+        </div>
+        <div class="saved-numbers" id="savedNumbers"></div>
+      </div>
+
+      <div class="input-group network-selector">
+        <label for="network">Network Provider</label>
+        <select id="network" required>
+          <option value="" disabled selected>Select your network</option>
+          <option value="mtn" class="network-option">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Mtn-logo.svg/1200px-Mtn-logo.svg.png" class="network-logo"> MTN
+          </option>
+          <option value="glo" class="network-option">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Glo_logo.svg/1200px-Glo_logo.svg.png" class="network-logo"> Glo
+          </option>
+          <option value="airtel" class="network-option">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Airtel_logo.svg/1200px-Airtel_logo.svg.png" class="network-logo"> Airtel
+          </option>
+          <option value="etisalat" class="network-option">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/9mobile_logo.svg/1200px-9mobile_logo.svg.png" class="network-logo"> 9mobile
+          </option>
+        </select>
+        <div class="network-icon" id="networkIcon">
+          <i class="fas fa-network-wired"></i>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Available Data Plans <span class="tooltip"><i class="fas fa-info-circle" style="color: var(--neon-blue);"></i>
+          <span class="tooltiptext">Select a plan by clicking on it. Popular plans are marked for your convenience.</span>
+        </span></label>
+        <div class="data-plans" id="dataPlans">
+          <!-- Plans will be loaded dynamically by JavaScript -->
+        </div>
+      </div>
+
+      <div class="selected-plan-info" id="selectedPlanInfo">
+        <div class="selected-plan-header">
+          <div class="selected-plan-data" id="selectedDataAmount"></div>
+          <div class="selected-plan-price" id="selectedPlanPrice"></div>
+        </div>
+        <div class="selected-plan-meta">
+          <span>Network: <span id="selectedPlanNetwork"></span></span>
+          <span>Validity: <span id="selectedPlanValidity"></span></span>
+        </div>
+        <div class="selected-plan-description">
+          <i class="fas fa-bolt" style="color: var(--neon-blue);"></i>
+          <span>Data will be credited instantly after payment</span>
+        </div>
+      </div>
+
+      <div id="cashbackDisplay" class="cashback-badge" style="display: none;">
+        <i class="fas fa-coins cashback-icon"></i>
+        <span id="cashbackAmount">0.00</span> Cashback Earned
+      </div>
+
+      <button type="submit" id="submitBtn">
+        <span id="btnText">Buy Data Now</span>
+      </button>
+    </form>
+
+    <div class="loading-container" id="loading">
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+    </div>
+
+    <p id="responseMsg"></p>
+  </div>
+
+  <script>
+    // Network data with colors, cashback rates, and data plans
+    const networks = {
+      mtn: { 
+        icon: "fas fa-bolt", 
+        color: "mtn", 
+        cashbackRate: 0.01, // 1% cashback
+        plans: [
+          { amount: 50, data: "50MB", validity: "1 day", price: 50, description: "Light browsing and messaging" },
+          { amount: 100, data: "150MB", validity: "1 day", price: 100, description: "Social media and light browsing" },
+          { amount: 200, data: "350MB", validity: "7 days", price: 200, description: "Weekly social media package" },
+          { amount: 500, data: "1GB", validity: "30 days", price: 500, popular: true, description: "Basic monthly browsing" },
+          { amount: 1000, data: "2.5GB", validity: "30 days", price: 1000, popular: true, description: "Standard monthly package" },
+          { amount: 2000, data: "6GB", validity: "30 days", price: 2000, description: "Heavy monthly usage" }
+        ]
+      },
+      glo: { 
+        icon: "fas fa-wifi", 
+        color: "glo",
+        cashbackRate: 0.015, // 1.5% cashback
+        plans: [
+          { amount: 50, data: "65MB", validity: "1 day", price: 50, description: "Light browsing and messaging" },
+          { amount: 100, data: "200MB", validity: "3 days", price: 100, description: "Short-term social media use" },
+          { amount: 200, data: "500MB", validity: "7 days", price: 200, description: "Weekly browsing package" },
+          { amount: 500, data: "1.6GB", validity: "14 days", price: 500, popular: true, description: "Bi-weekly data package" },
+          { amount: 1000, data: "3.5GB", validity: "30 days", price: 1000, popular: true, description: "Monthly standard package" },
+          { amount: 2000, data: "7.2GB", validity: "30 days", price: 2000, description: "Monthly premium package" }
+        ]
+      },
+      airtel: { 
+        icon: "fas fa-signal", 
+        color: "airtel",
+        cashbackRate: 0.02, // 2% cashback
+        plans: [
+          { amount: 50, data: "100MB", validity: "1 day", price: 50, description: "Daily light browsing" },
+          { amount: 100, data: "300MB", validity: "7 days", price: 100, description: "Weekly light package" },
+          { amount: 200, data: "750MB", validity: "14 days", price: 200, description: "Bi-weekly standard package" },
+          { amount: 500, data: "1.5GB", validity: "30 days", price: 500, popular: true, description: "Monthly basic package" },
+          { amount: 1000, data: "3GB", validity: "30 days", price: 1000, popular: true, description: "Monthly standard package" },
+          { amount: 2000, data: "8GB", validity: "30 days", price: 2000, description: "Monthly premium package" }
+        ]
+      },
+      etisalat: { 
+        icon: "fas fa-network-wired", 
+        color: "mobile",
+        cashbackRate: 0.025, // 2.5% cashback
+        plans: [
+          { amount: 50, data: "25MB", validity: "1 day", price: 50, description: "Light daily browsing" },
+          { amount: 100, data: "100MB", validity: "1 day", price: 100, description: "Daily social media package" },
+          { amount: 200, data: "200MB", validity: "3 days", price: 200, description: "Short-term browsing" },
+          { amount: 500, data: "1GB", validity: "7 days", price: 500, popular: true, description: "Weekly standard package" },
+          { amount: 1000, data: "2.5GB", validity: "30 days", price: 1000, popular: true, description: "Monthly standard package" },
+          { amount: 2000, data: "5GB", validity: "30 days", price: 2000, description: "Monthly premium package" }
+        ]
+      }
+    };
+
+    // Current selected plan
+    let selectedPlan = null;
+
+    // Load saved phone numbers from localStorage
+    function loadSavedNumbers() {
+      const savedNumbers = JSON.parse(localStorage.getItem('savedPhoneNumbers')) || [];
+      const container = document.getElementById('savedNumbers');
+      container.innerHTML = '';
+      
+      savedNumbers.forEach(number => {
+        const numberElement = document.createElement('span');
+        numberElement.className = 'saved-number';
+        numberElement.innerHTML = `${formatPhoneNumber(number)} <i class="fas fa-times remove-number"></i>`;
+        numberElement.addEventListener('click', (e) => {
+          if (e.target.classList.contains('remove-number')) {
+            // Remove number from saved list
+            const updatedNumbers = savedNumbers.filter(n => n !== number);
+            localStorage.setItem('savedPhoneNumbers', JSON.stringify(updatedNumbers));
+            loadSavedNumbers();
+          } else {
+            // Fill the phone input
+            document.getElementById('phone').value = formatPhoneNumber(number);
+          }
+        });
+        container.appendChild(numberElement);
+      });
+    }
+
+    // Format phone number with spaces
+    function formatPhoneNumber(phone) {
+      const cleaned = phone.replace(/\D/g, '');
+      if (cleaned.length === 11) {
+        return cleaned.replace(/(\d{4})(\d{3})(\d{4})/, '$1 $2 $3');
+      }
+      return cleaned.replace(/(\d{1,4})/g, '$1 ').trim();
+    }
+
+    // Calculate cashback
+    function calculateCashback(amount) {
+      if (!amount || !document.getElementById('network').value) return 0;
+      const network = document.getElementById('network').value;
+      const rate = networks[network]?.cashbackRate || 0;
+      const cashback = Math.max(0.05, amount * rate); // Minimum ₦0.05
+      return Math.round(cashback * 100) / 100; // Round to 2 decimal places
+    }
+
+    // Update cashback display
+    function updateCashback() {
+      const amount = selectedPlan?.price || 0;
+      const cashback = calculateCashback(amount);
+      
+      if (amount >= 50 && document.getElementById('network').value) {
+        document.getElementById('cashbackAmount').textContent = cashback.toFixed(2);
+        document.getElementById('cashbackDisplay').style.display = 'inline-flex';
+      } else {
+        document.getElementById('cashbackDisplay').style.display = 'none';
+      }
+    }
+
+    // Load data plans for selected network
+    function loadDataPlans(network) {
+      const plansContainer = document.getElementById('dataPlans');
+      plansContainer.innerHTML = '';
+      selectedPlan = null;
+      document.getElementById('selectedPlanInfo').style.display = 'none';
+      document.getElementById('cashbackDisplay').style.display = 'none';
+      
+      if (!network || !networks[network]) return;
+      
+      networks[network].plans.forEach(plan => {
+        const planElement = document.createElement('div');
+        planElement.className = 'data-plan';
+        if (plan.popular) {
+          planElement.innerHTML = `
+            <div class="data-plan-amount">${plan.data}</div>
+            <div class="data-plan-details">₦${plan.price}</div>
+            <div class="data-plan-validity">${plan.validity}</div>
+            <div class="data-plan-badge">HOT</div>
+          `;
+        } else {
+          planElement.innerHTML = `
+            <div class="data-plan-amount">${plan.data}</div>
+            <div class="data-plan-details">₦${plan.price}</div>
+            <div class="data-plan-validity">${plan.validity}</div>
+          `;
+        }
+        
+        planElement.addEventListener('click', () => {
+          // Remove selected class from all plans
+          document.querySelectorAll('.data-plan').forEach(p => {
+            p.classList.remove('selected');
+          });
+          
+          // Add selected class to clicked plan
+          planElement.classList.add('selected');
+          selectedPlan = plan;
+          
+          // Update selected plan info
+          document.getElementById('selectedPlanInfo').style.display = 'block';
+          document.getElementById('selectedDataAmount').textContent = plan.data;
+          document.getElementById('selectedPlanPrice').textContent = `₦${plan.price}`;
+          document.getElementById('selectedPlanNetwork').textContent = 
+            document.getElementById('network').options[document.getElementById('network').selectedIndex].text.trim();
+          document.getElementById('selectedPlanValidity').textContent = plan.validity;
+          
+          updateCashback();
+        });
+        
+        plansContainer.appendChild(planElement);
+      });
+    }
+
+    // Update network icon and color
+    function updateNetworkIcon(network) {
+      const networkIcon = document.getElementById('networkIcon');
+      if (networks[network]) {
+        networkIcon.innerHTML = `<i class="${networks[network].icon}"></i>`;
+        networkIcon.className = `network-icon ${networks[network].color}`;
+        loadDataPlans(network);
+      } else {
+        networkIcon.innerHTML = '<i class="fas fa-network-wired"></i>';
+        networkIcon.className = 'network-icon';
+      }
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      loadSavedNumbers();
+      
+      // Load last used network if available
+      const lastNetwork = localStorage.getItem('lastUsedNetwork');
+      if (lastNetwork && networks[lastNetwork]) {
+        document.getElementById('network').value = lastNetwork;
+        updateNetworkIcon(lastNetwork);
+      }
+
+      // Load remembered phone number if checkbox is checked
+      const rememberChecked = localStorage.getItem('rememberNumber') === 'true';
+      document.getElementById('rememberNumber').checked = rememberChecked;
+      
+      if (rememberChecked) {
+        const lastPhone = localStorage.getItem('lastUsedPhone');
+        if (lastPhone) {
+          document.getElementById('phone').value = formatPhoneNumber(lastPhone);
+        }
+      }
+
+      // Set up event listeners
+      document.getElementById('network').addEventListener('change', function() {
+        updateNetworkIcon(this.value);
+        updateCashback();
+        localStorage.setItem('lastUsedNetwork', this.value);
+      });
+
+      document.getElementById('phone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 0) {
+          value = formatPhoneNumber(value);
+        }
+        e.target.value = value;
+      });
+
+      // Auto-select first popular plan when network changes
+      document.getElementById('network').addEventListener('change', function() {
+        setTimeout(() => {
+          const popularPlan = document.querySelector('.data-plan-badge')?.closest('.data-plan');
+          if (popularPlan) {
+            popularPlan.click();
+          }
+        }, 100);
+      });
+    });
+
+    // Form submission
+    document.getElementById("dataForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const phone = document.getElementById("phone").value.replace(/\s/g, '');
+      const network = document.getElementById("network").value;
+      const rememberNumber = document.getElementById("rememberNumber").checked;
+      const submitBtn = document.getElementById("submitBtn");
+      const loading = document.getElementById("loading");
+      const responseMsg = document.getElementById("responseMsg");
+      
+      // Validate inputs
+      if (!phone || phone.length !== 11 || !network || !selectedPlan) {
+        responseMsg.textContent = "❌ Please fill all fields and select a data plan";
+        responseMsg.className = "error";
+        responseMsg.style.display = "block";
+        return;
+      }
+
+      // Show loading animation
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing';
+      loading.style.display = "flex";
+      responseMsg.textContent = "";
+      responseMsg.className = "";
+      
+      // Save phone number if remember is checked
+      if (rememberNumber) {
+        localStorage.setItem('rememberNumber', 'true');
+        localStorage.setItem('lastUsedPhone', phone);
+        
+        // Add to saved numbers if not already there
+        const savedNumbers = JSON.parse(localStorage.getItem('savedPhoneNumbers')) || [];
+        if (!savedNumbers.includes(phone)) {
+          savedNumbers.push(phone);
+          localStorage.setItem('savedPhoneNumbers', JSON.stringify(savedNumbers));
+          loadSavedNumbers();
+        }
+      } else {
+        localStorage.setItem('rememberNumber', 'false');
+      }
+
+      // Calculate cashback
+      const cashback = calculateCashback(selectedPlan.price);
+      
+      // Simulate API call with timeout (replace with actual fetch)
+      setTimeout(() => {
+        // This is a simulation - replace with your actual API call
+        const isSuccess = Math.random() > 0.3; // 70% chance of success
+        
+        if (isSuccess) {
+          responseMsg.innerHTML = `
+            <div style="margin-bottom: 10px;">✅ Success! ${selectedPlan.data} data activated for ${formatPhoneNumber(phone)}</div>
+            <div style="font-size: 14px; margin-bottom: 5px;">Network: ${document.getElementById('network').options[document.getElementById('network').selectedIndex].text.trim()}</div>
+            <div style="font-size: 14px; margin-bottom: 5px;">Validity: ${selectedPlan.validity}</div>
+            <div style="font-size: 14px; font-weight: 600; color: var(--neon-blue);">You earned ₦${cashback.toFixed(2)} cashback!</div>
+          `;
+          responseMsg.className = "success";
+          
+          // Clear form on success (except network)
+          document.getElementById("phone").value = "";
+          selectedPlan = null;
+          document.getElementById("selectedPlanInfo").style.display = "none";
+          document.querySelectorAll('.data-plan').forEach(p => {
+            p.classList.remove('selected');
+          });
+        } else {
+          responseMsg.textContent = "❌ Failed to process request. Please try again.";
+          responseMsg.className = "error";
+        }
+        
+        // Hide loading animation
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span id="btnText">Buy Data Now</span>';
+        loading.style.display = "none";
+      }, 2000);
+    });
+
+    // Initialize the first popular plan if available
+    setTimeout(() => {
+      const popularPlan = document.querySelector('.data-plan-badge')?.closest('.data-plan');
+      if (popularPlan) {
+        popularPlan.click();
+      }
+    }, 500);
+  </script>
+</body>
+</html>
